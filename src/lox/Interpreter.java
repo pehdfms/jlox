@@ -178,6 +178,10 @@ public class Interpreter implements Expr.Visitor<Object>,
                         "Invalid use of operator.");
             case SLASH:
                 checkNumberOperands(expr.operator, left, right);
+                if ((double)right == 0) {
+                    throw new RuntimeError(expr.operator, "Division by 0.");
+                }
+
                 return (double)left / (double)right;
             case STAR:
                 checkNumberOperands(expr.operator, left, right);
